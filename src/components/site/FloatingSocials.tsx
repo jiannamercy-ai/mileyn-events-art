@@ -46,7 +46,7 @@ export function FloatingSocials() {
     },
     {
       label: "Call",
-      href: "tel:+254722110000",
+      href: "tel:+254719263308",
       Icon: ({ className }: { className?: string }) => <Phone className={className} />,
       bg: "bg-[#2c2c2c]",
       shadow: "shadow-[0_8px_24px_-6px_rgba(0,0,0,0.4)]",
