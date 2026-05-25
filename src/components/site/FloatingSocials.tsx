@@ -1,7 +1,9 @@
+
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useContent } from "@/lib/content";
 import { WhatsAppIcon, InstagramIcon, EmailIcon } from "./BrandIcons";
+import { Phone } from "lucide-react";
 
 export function FloatingSocials() {
   const SOCIAL = useContent().social;
@@ -42,6 +44,13 @@ export function FloatingSocials() {
       bg: "bg-amber-gold",
       shadow: "shadow-[0_8px_24px_-6px_rgba(200,169,126,0.7)]",
     },
+    {
+      label: "Call",
+      href: "tel:+254722110000",
+      Icon: ({ className }: { className?: string }) => <Phone className={className} />,
+      bg: "bg-[#2c2c2c]",
+      shadow: "shadow-[0_8px_24px_-6px_rgba(0,0,0,0.4)]",
+    },
   ];
 
   return (
@@ -58,7 +67,7 @@ export function FloatingSocials() {
             <motion.a
               key={label}
               href={href}
-              target={href.startsWith("mailto:") ? undefined : "_blank"}
+              target={href.startsWith("mailto:") || href.startsWith("tel:") ? undefined : "_blank"}
               rel="noreferrer"
               aria-label={label}
               initial={{ opacity: 0, scale: 0.5 }}
@@ -69,7 +78,6 @@ export function FloatingSocials() {
               className={`group relative flex h-13 w-13 md:h-14 md:w-14 items-center justify-center rounded-full ${bg} ${shadow} text-white`}
               style={{ height: 52, width: 52 }}
             >
-              {/* subtle pulse halo */}
               <span
                 aria-hidden
                 className={`absolute inset-0 rounded-full ${bg} opacity-50 animate-ping`}
