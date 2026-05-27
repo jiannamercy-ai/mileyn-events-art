@@ -6,10 +6,19 @@ import { useContent } from "@/lib/content";
 
 const EVENT_TYPES = [
   "Wedding",
-  "Corporate Gala",
+  "Corporate Gala / Launch",
+  "Conference",
   "Private Celebration",
   "Destination Event",
   "Other",
+];
+
+const BUDGET_RANGES = [
+  "Under KSh 500K",
+  "KSh 500K – 1M",
+  "KSh 1M – 3M",
+  "KSh 3M – 6M",
+  "KSh 6M+",
 ];
 
 export function Contact() {
@@ -27,6 +36,10 @@ export function Contact() {
     const email = String(data.get("email") || "").trim();
     const phone = String(data.get("phone") || "").trim();
     const eventType = String(data.get("eventType") || "").trim();
+    const eventDate = String(data.get("eventDate") || "").trim();
+    const guestCount = String(data.get("guestCount") || "").trim();
+    const venue = String(data.get("venue") || "").trim();
+    const budget = String(data.get("budget") || "").trim();
     const message = String(data.get("message") || "").trim();
 
     const lines = [
@@ -36,6 +49,10 @@ export function Contact() {
       `Email: ${email}`,
       `Phone: ${phone || "—"}`,
       `Event type: ${eventType || "—"}`,
+      `Event date: ${eventDate || "—"}`,
+      `Guest count: ${guestCount || "—"}`,
+      `Venue: ${venue || "—"}`,
+      `Budget range: ${budget || "—"}`,
       "",
       "Message:",
       message || "—",
@@ -43,16 +60,13 @@ export function Contact() {
     const body = lines.join("\n");
     const subject = `Booking Inquiry — ${name || "New Lead"}${eventType ? ` (${eventType})` : ""}`;
 
-    // 1) Send to email (opens user's mail client with prefilled message)
     const mailUrl = `mailto:${SOCIAL.email}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
 
-    // 2) Send to WhatsApp (opens chat with same prefilled message)
     const waNumber = SOCIAL.whatsapp.replace(/[^0-9]/g, "");
     const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(body)}`;
 
-    // Open WhatsApp in new tab, then email in current tab — both delivery channels fire.
     window.open(waUrl, "_blank", "noopener,noreferrer");
     setTimeout(() => {
       window.location.href = mailUrl;
