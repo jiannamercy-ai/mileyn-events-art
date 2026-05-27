@@ -24,10 +24,13 @@ export function Services() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <h2 className="font-display text-4xl md:text-6xl">Our Suite of Services</h2>
+          <p className="text-amber-gold text-[11px] uppercase tracking-[0.4em] font-medium glow-gold-text">
+            What We Do
+          </p>
+          <h2 className="font-display text-4xl md:text-6xl mt-4">End-to-end event solutions</h2>
           <div className="mt-5 flex justify-center"><GoldenThread width={48} /></div>
           <p className="mt-6 text-taupe text-lg font-light max-w-xl mx-auto">
-            Every event type, treated with the same obsession for detail.
+            Tailored to your vision, your guests, and your standards — from concept to flawless execution.
           </p>
         </motion.div>
 

@@ -3,11 +3,14 @@ import { useEffect, useState } from "react";
 import { IntroAnimation } from "@/components/site/IntroAnimation";
 import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
+import { BrandStrip } from "@/components/site/BrandStrip";
 import { About } from "@/components/site/About";
 import { Services } from "@/components/site/Services";
 import { Portfolio } from "@/components/site/Portfolio";
+import { CorporateWeddingSplit } from "@/components/site/CorporateWeddingSplit";
 import { Team } from "@/components/site/Team";
 import { Testimonials } from "@/components/site/Testimonials";
+import { FinalCTA } from "@/components/site/FinalCTA";
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
@@ -52,11 +55,14 @@ function Index() {
       <Navbar visible={introDone} />
 
       <Hero ready={introDone} />
+      <BrandStrip />
       <About />
       <Services />
       <Portfolio />
+      <CorporateWeddingSplit />
       <Team />
       <Testimonials />
+      <FinalCTA />
       <Contact />
       <Footer />
 
