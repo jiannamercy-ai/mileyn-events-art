@@ -1,7 +1,14 @@
 import { createFileRoute, useNavigate, Link, redirect } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { DEFAULT_CONTENT, type SiteContent, saveContent, uploadImage } from "@/lib/content";
+import { DEFAULT_CONTENT, type SiteContent, saveContent } from "@/lib/content";
 import { supabase } from "@/integrations/supabase/client";
+import { HeroEditor } from "@/components/admin/HeroEditor";
+import { AboutEditor } from "@/components/admin/AboutEditor";
+import { ServicesManager } from "@/components/admin/ServicesManager";
+import { ProjectsManager } from "@/components/admin/ProjectsManager";
+import { TextInput } from "@/components/admin/TextInput";
+import { TextArea } from "@/components/admin/TextArea";
+import { ArrayManager } from "@/components/admin/ArrayManager";
 
 export const Route = createFileRoute("/admin/")({
   beforeLoad: async () => {
@@ -170,98 +177,208 @@ function AdminDashboard() {
       </header>
 
       <div className="mx-auto max-w-5xl px-6 py-10 space-y-6">
-        {tab === "hero" && <HeroEditor value={content.hero} onChange={(v) => update("hero", v)} />}
-        {tab === "about" && <AboutEditor value={content.about} onChange={(v) => update("about", v)} />}
-        {tab === "services" && (
-          <ListEditor
-            title="Services"
-            value={content.services}
-            onChange={(v) => update("services", v)}
-            blank={() => ({
-              slug: `service-${Date.now()}`,
-              name: "New Service",
-              tagline: "",
-              img: "",
-              intro: "",
-              whatsIncluded: [],
-              process: [],
-              signature: "",
-              starting: "",
-            })}
-            renderItem={(item, set) => <ServiceFields value={item} onChange={set} />}
-            label={(s) => s.name || s.slug}
-          />
+        {tab === "hero" && <HeroEditor hero={content.hero} onChange={(hero) => update("hero", hero)} />}
+        {tab === "about" && <AboutEditor about={content.about} onChange={(about) => update("about", about)} />}
+        {tab === "services" && <ServicesManager services={content.services} onChange={(services) => update("services", services)} />}
+        {tab === "projects" && <ProjectsManager projects={content.projects} onChange={(projects) => update("projects", projects)} />}
+        {tab === "team" && (
+          <div className="space-y-6">
+            <h3 className="font-display text-xl text-amber-gold">Team Collage Section</h3>
+            <TextInput
+              value={content.team.eyebrow}
+              onChange={(eyebrow) => update("team", { ...content.team, eyebrow })}
+              label="Eyebrow"
+            />
+            <TextInput
+              value={content.team.headingTop}
+              onChange={(headingTop) => update("team", { ...content.team, headingTop })}
+              label="Heading (Top Line)"
+            />
+            <TextInput
+              value={content.team.headingEm}
+              onChange={(headingEm) => update("team", { ...content.team, headingEm })}
+              label="Heading (Gold Emphasized)"
+            />
+            <TextArea
+              value={content.team.intro}
+              onChange={(intro) => update("team", { ...content.team, intro })}
+              label="Intro Text"
+              rows={4}
+            />
+            <TextArea
+              value={content.team.quote}
+              onChange={(quote) => update("team", { ...content.team, quote })}
+              label="Quote"
+              rows={2}
+            />
+            <ArrayManager<{ src: string; caption: string }>
+              items={content.team.frames}
+              onChange={(frames) => update("team", { ...content.team, frames })}
+              label="Collage Frames (Image + Caption)"
+              createNew={() => ({ src: "", caption: "" })}
+              renderItem={(frame, _index, onChange) => (
+                <div className="space-y-2">
+                  <TextInput
+                    value={frame.src}
+                    onChange={(src) => onChange({ ...frame, src })}
+                    placeholder="Image URL"
+                  />
+                  <TextInput
+                    value={frame.caption}
+                    onChange={(caption) => onChange({ ...frame, caption })}
+                    placeholder="Frame caption"
+                  />
+                </div>
+              )}
+            />
+          </div>
         )}
-        {tab === "projects" && (
-          <ListEditor
-            title="Portfolio Projects"
-            value={content.projects}
-            onChange={(v) => update("projects", v)}
-            blank={() => ({
-              slug: `project-${Date.now()}`,
-              name: "New Project",
-              type: "",
-              location: "",
-              guests: "",
-              date: "",
-              img: "",
-              gallery: [],
-              story: "",
-              highlights: [],
-            })}
-            renderItem={(item, set) => <ProjectFields value={item} onChange={set} />}
-            label={(p) => p.name || p.slug}
-          />
-        )}
-        {tab === "team" && <TeamCollageEditor value={content.team} onChange={(v) => update("team", v)} />}
         {tab === "teamFull" && (
-          <ListEditor
-            title="Team Members (Full Bios)"
-            value={content.teamFull}
-            onChange={(v) => update("teamFull", v)}
-            blank={() => ({
-              slug: `member-${Date.now()}`,
-              name: "New Member",
-              role: "",
-              img: "",
-              bio: "",
-              specialties: [],
-              years: "",
-            })}
-            renderItem={(m, set) => <TeamMemberFields value={m} onChange={set} />}
-            label={(m) => m.name || m.slug}
-          />
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h3 className="font-display text-xl text-amber-gold">Team Members</h3>
+              <button
+                onClick={() => update("teamFull", [...content.teamFull, { slug: `member-${Date.now()}`, name: "", role: "", img: "", bio: "", specialties: [], years: "" }])}
+                className="flex items-center gap-2 px-3 py-2 bg-amber-gold/20 hover:bg-amber-gold/30 border border-amber-gold/50 rounded text-amber-gold text-xs uppercase tracking-[0.15em] transition-colors"
+              >
+                + Add Member
+              </button>
+            </div>
+            <ArrayManager<(typeof content.teamFull)[number]>
+              items={content.teamFull}
+              onChange={(teamFull) => update("teamFull", teamFull)}
+              createNew={() => ({ slug: `member-${Date.now()}`, name: "", role: "", img: "", bio: "", specialties: [], years: "" })}
+              renderItem={(member, _index, onChange) => (
+                <div className="space-y-3 p-4 bg-charcoal/40 border border-amber-gold/20 rounded">
+                  <TextInput
+                    value={member.slug}
+                    onChange={(slug) => onChange({ ...member, slug })}
+                    label="ID (slug)"
+                  />
+                  <TextInput
+                    value={member.name}
+                    onChange={(name) => onChange({ ...member, name })}
+                    label="Name"
+                  />
+                  <TextInput
+                    value={member.role}
+                    onChange={(role) => onChange({ ...member, role })}
+                    label="Role"
+                  />
+                  <TextInput
+                    value={member.img}
+                    onChange={(img) => onChange({ ...member, img })}
+                    label="Photo URL"
+                  />
+                  <TextArea
+                    value={member.bio}
+                    onChange={(bio) => onChange({ ...member, bio })}
+                    label="Bio"
+                    rows={3}
+                  />
+                  <TextInput
+                    value={member.years}
+                    onChange={(years) => onChange({ ...member, years })}
+                    label="Years Experience"
+                  />
+                  <ArrayManager<string>
+                    items={member.specialties}
+                    onChange={(specialties) => onChange({ ...member, specialties })}
+                    label="Specialties"
+                    createNew={() => ""}
+                    renderItem={(specialty, _i, onSpecialtyChange) => (
+                      <TextInput
+                        value={specialty}
+                        onChange={onSpecialtyChange}
+                        placeholder="e.g., Floral Design"
+                      />
+                    )}
+                  />
+                </div>
+              )}
+            />
+          </div>
         )}
         {tab === "testimonials" && (
-          <ListEditor
-            title="Testimonials"
-            value={content.testimonials}
-            onChange={(v) => update("testimonials", v)}
-            blank={() => ({ quote: "", name: "", role: "" })}
-            renderItem={(t, set) => (
-              <div className="space-y-3">
-                <Field label="Quote" value={t.quote} onChange={(v) => set({ ...t, quote: v })} textarea />
-                <Field label="Name" value={t.name} onChange={(v) => set({ ...t, name: v })} />
-                <Field label="Role / Event" value={t.role} onChange={(v) => set({ ...t, role: v })} />
-              </div>
-            )}
-            label={(t) => t.name || t.quote.slice(0, 40)}
-          />
+          <div className="space-y-6">
+            <h3 className="font-display text-xl text-amber-gold">Testimonials</h3>
+            <ArrayManager<(typeof content.testimonials)[number]>
+              items={content.testimonials}
+              onChange={(testimonials) => update("testimonials", testimonials)}
+              createNew={() => ({ quote: "", name: "", role: "" })}
+              renderItem={(testimonial, _index, onChange) => (
+                <div className="space-y-3">
+                  <TextArea
+                    value={testimonial.quote}
+                    onChange={(quote) => onChange({ ...testimonial, quote })}
+                    label="Quote"
+                    rows={3}
+                  />
+                  <TextInput
+                    value={testimonial.name}
+                    onChange={(name) => onChange({ ...testimonial, name })}
+                    label="Name"
+                  />
+                  <TextInput
+                    value={testimonial.role}
+                    onChange={(role) => onChange({ ...testimonial, role })}
+                    label="Role / Event"
+                  />
+                </div>
+              )}
+            />
+          </div>
         )}
         {tab === "social" && (
-          <Section title="Contact & Social">
-            <Field label="WhatsApp number (with country code, no spaces)" value={content.social.whatsapp} onChange={(v) => update("social", { ...content.social, whatsapp: v })} />
-            <Field label="WhatsApp display (formatted)" value={content.social.whatsappDisplay} onChange={(v) => update("social", { ...content.social, whatsappDisplay: v })} />
-            <Field label="Email" value={content.social.email} onChange={(v) => update("social", { ...content.social, email: v })} />
-            <Field label="Instagram handle (no @)" value={content.social.instagram} onChange={(v) => update("social", { ...content.social, instagram: v })} />
-            <Field label="Phone (tel:)" value={content.social.phone} onChange={(v) => update("social", { ...content.social, phone: v })} />
-          </Section>
+          <div className="space-y-6">
+            <h3 className="font-display text-xl text-amber-gold">Contact & Social Links</h3>
+            <TextInput
+              value={content.social.whatsapp}
+              onChange={(whatsapp) => update("social", { ...content.social, whatsapp })}
+              label="WhatsApp Number (with country code, no spaces)"
+              placeholder="+254712345678"
+            />
+            <TextInput
+              value={content.social.whatsappDisplay}
+              onChange={(whatsappDisplay) => update("social", { ...content.social, whatsappDisplay })}
+              label="WhatsApp Display (formatted)"
+              placeholder="+254 (712) 345 678"
+            />
+            <TextInput
+              value={content.social.email}
+              onChange={(email) => update("social", { ...content.social, email })}
+              label="Email"
+              type="email"
+            />
+            <TextInput
+              value={content.social.instagram}
+              onChange={(instagram) => update("social", { ...content.social, instagram })}
+              label="Instagram Handle (without @)"
+              placeholder="mileyn_events"
+            />
+            <TextInput
+              value={content.social.phone}
+              onChange={(phone) => update("social", { ...content.social, phone })}
+              label="Phone (tel:)"
+              placeholder="+254712345678"
+            />
+          </div>
         )}
         {tab === "footer" && (
-          <Section title="Footer">
-            <Field label="Tagline" value={content.footer.tagline} onChange={(v) => update("footer", { ...content.footer, tagline: v })} />
-            <Field label="Copyright line" value={content.footer.copyright} onChange={(v) => update("footer", { ...content.footer, copyright: v })} />
-          </Section>
+          <div className="space-y-6">
+            <h3 className="font-display text-xl text-amber-gold">Footer</h3>
+            <TextArea
+              value={content.footer.tagline}
+              onChange={(tagline) => update("footer", { ...content.footer, tagline })}
+              label="Tagline"
+              rows={2}
+            />
+            <TextInput
+              value={content.footer.copyright}
+              onChange={(copyright) => update("footer", { ...content.footer, copyright })}
+              label="Copyright Line"
+            />
+          </div>
         )}
 
         <div className="sticky bottom-4 flex justify-end">
