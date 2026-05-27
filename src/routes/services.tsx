@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { GoldenThread } from "@/components/site/GoldenThread";
 import { SocialLinks } from "@/components/site/SocialLinks";
+import { useContent } from "@/lib/content";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -14,6 +15,7 @@ export const Route = createFileRoute("/services")({
 });
 
 function ServicesPage() {
+  const SOCIAL = useContent().social;
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -238,13 +240,22 @@ function ServicesPage() {
           <h2 className="font-display text-3xl md:text-5xl leading-[1.1]">
             Let's plan your event the right way.
           </h2>
-          <Link
-            to="/"
-            hash="contact"
-            className="inline-block bg-amber-gold text-espresso px-8 py-3.5 text-xs tracking-[0.3em] uppercase hover:bg-amber-gold/90 transition-colors"
-          >
-            Request a Proposal
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href={`https://wa.me/${SOCIAL.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent("Hello Mileyn — I'd like to discuss an event.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-amber-gold text-espresso px-8 py-3.5 text-xs tracking-[0.3em] uppercase hover:bg-amber-gold/90 transition-colors"
+            >
+              Message on WhatsApp
+            </a>
+            <a
+              href={`mailto:${SOCIAL.email}?subject=${encodeURIComponent("Event Inquiry")}`}
+              className="inline-block border border-amber-gold text-amber-gold px-8 py-3.5 text-xs tracking-[0.3em] uppercase hover:bg-amber-gold hover:text-espresso transition-colors"
+            >
+              Or Email Us
+            </a>
+          </div>
           <div className="pt-8">
             <SocialLinks tone="dark" />
           </div>

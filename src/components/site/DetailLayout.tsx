@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { GoldenThread } from "./GoldenThread";
 import { SocialLinks } from "./SocialLinks";
+import { useContent } from "@/lib/content";
 
 export function DetailLayout({
   eyebrow,
@@ -15,6 +16,15 @@ export function DetailLayout({
   heroImg: string;
   children: React.ReactNode;
 }) {
+  const SOCIAL = useContent().social;
+  const waNumber = SOCIAL.whatsapp.replace(/[^0-9]/g, "");
+  const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(
+    "Hello Mileyn — I'd like to discuss an event."
+  )}`;
+  const emailUrl = `mailto:${SOCIAL.email}?subject=${encodeURIComponent(
+    "Event Inquiry"
+  )}`;
+
   return (
     <main className="bg-cream text-espresso min-h-screen">
       {/* Hero */}
@@ -62,14 +72,21 @@ export function DetailLayout({
           <p className="mt-4 text-cream/70 font-light">
             Reach out — we'll respond personally within 24 hours.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link
-              to="/"
-              hash="contact"
+          <div className="mt-8 flex flex-col sm:flex-row flex-wrap justify-center gap-4">
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-amber-gold text-espresso px-8 py-3.5 text-xs tracking-[0.3em] uppercase hover:bg-amber-gold/90 transition-colors"
             >
-              Begin Your Vision
-            </Link>
+              Message on WhatsApp
+            </a>
+            <a
+              href={emailUrl}
+              className="border border-amber-gold text-amber-gold px-8 py-3.5 text-xs tracking-[0.3em] uppercase hover:bg-amber-gold hover:text-espresso transition-colors"
+            >
+              Or Email Us
+            </a>
           </div>
           <div className="mt-8 flex justify-center"><SocialLinks tone="dark" /></div>
         </div>

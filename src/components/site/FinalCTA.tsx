@@ -7,6 +7,9 @@ export function FinalCTA() {
   const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(
     "Hello Mileyn — I'd like to discuss an event."
   )}`;
+  const emailUrl = `mailto:${SOCIAL.email}?subject=${encodeURIComponent(
+    "Event Inquiry"
+  )}`;
 
   return (
     <section className="relative bg-espresso text-cream py-28 px-6 md:px-12 overflow-hidden">
@@ -28,20 +31,20 @@ export function FinalCTA() {
         <p className="mt-6 text-cream/80 text-base md:text-lg font-light max-w-xl mx-auto">
           Tell us about your event and we'll guide you through the process.
         </p>
-        <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <a
-            href="/contact"
-            className="gold-sweep bg-amber-gold text-espresso px-8 py-4 text-xs tracking-[0.3em] uppercase font-medium hover:bg-amber-gold/90 transition-colors"
-          >
-            Request a Proposal
-          </a>
+        <div className="mt-10 flex flex-col sm:flex-row flex-wrap justify-center gap-4">
           <a
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
+            className="gold-sweep bg-amber-gold text-espresso px-8 py-4 text-xs tracking-[0.3em] uppercase font-medium hover:bg-amber-gold/90 transition-colors"
+          >
+            Message on WhatsApp
+          </a>
+          <a
+            href={emailUrl}
             className="gold-sweep border border-amber-gold text-amber-gold px-8 py-4 text-xs tracking-[0.3em] uppercase font-medium hover:bg-amber-gold hover:text-espresso transition-colors"
           >
-            WhatsApp Us
+            Or Email Us
           </a>
         </div>
       </motion.div>

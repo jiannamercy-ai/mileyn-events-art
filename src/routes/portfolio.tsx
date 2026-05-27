@@ -20,6 +20,7 @@ type FilterCategory = "weddings" | "corporate" | "private";
 
 function PortfolioPage() {
   const projects = useContent().projects;
+  const SOCIAL = useContent().social;
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("weddings");
 
   const filterConfig = {
@@ -232,13 +233,22 @@ function PortfolioPage() {
           <h2 className="font-display text-3xl md:text-5xl leading-[1.1]">
             Ready to create your next unforgettable event?
           </h2>
-          <Link
-            to="/"
-            hash="contact"
-            className="inline-block bg-amber-gold text-espresso px-8 py-3.5 text-xs tracking-[0.3em] uppercase hover:bg-amber-gold/90 transition-colors"
-          >
-            Request a Proposal
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href={`https://wa.me/${SOCIAL.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent("Hello Mileyn — I'd like to discuss an event.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-amber-gold text-espresso px-8 py-3.5 text-xs tracking-[0.3em] uppercase hover:bg-amber-gold/90 transition-colors"
+            >
+              Message on WhatsApp
+            </a>
+            <a
+              href={`mailto:${SOCIAL.email}?subject=${encodeURIComponent("Event Inquiry")}`}
+              className="inline-block border border-amber-gold text-amber-gold px-8 py-3.5 text-xs tracking-[0.3em] uppercase hover:bg-amber-gold hover:text-espresso transition-colors"
+            >
+              Or Email Us
+            </a>
+          </div>
         </motion.div>
       </section>
       <Footer />

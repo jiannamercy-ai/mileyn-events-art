@@ -22,6 +22,12 @@ function ContactPage() {
 
   const contactInfoItems = [
     {
+      icon: MessageCircle,
+      label: "WhatsApp (Fastest)",
+      value: SOCIAL.whatsappDisplay,
+      href: `https://wa.me/${SOCIAL.whatsapp.replace(/[^0-9]/g, "")}`,
+    },
+    {
       icon: Mail,
       label: "Email",
       value: SOCIAL.email,
@@ -32,12 +38,6 @@ function ContactPage() {
       label: "Phone",
       value: SOCIAL.whatsappDisplay,
       href: `tel:${SOCIAL.phone}`,
-    },
-    {
-      icon: MessageCircle,
-      label: "WhatsApp",
-      value: SOCIAL.whatsappDisplay,
-      href: `https://wa.me/${SOCIAL.whatsapp.replace(/[^0-9]/g, "")}`,
     },
   ];
 

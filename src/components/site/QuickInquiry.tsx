@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail } from "lucide-react";
+import { MessageCircle } from "lucide-react";
+import { useContent } from "@/lib/content";
 
 export function QuickInquiry() {
   const [visible, setVisible] = useState(false);
@@ -8,6 +9,7 @@ export function QuickInquiry() {
   const [submitted, setSubmitted] = useState(false);
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
+  const SOCIAL = useContent().social;
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.7);
@@ -15,6 +17,17 @@ export function QuickInquiry() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    const waNumber = SOCIAL.whatsapp.replace(/[^0-9]/g, "");
+    const message = `Hello Mileyn — My name is ${name}. You can reach me at ${contact}. I'd like to discuss an event.`;
+    const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+    
+    window.open(waUrl, "_blank", "noopener,noreferrer");
+    setSubmitted(true);
+  };
 
   return (
     <>
@@ -25,12 +38,12 @@ export function QuickInquiry() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
             onClick={() => setOpen(true)}
-            whileHover={{ width: 160 }}
-            className="group fixed right-6 top-1/2 z-40 flex h-12 w-12 -translate-y-1/2 items-center justify-start overflow-hidden rounded-full bg-amber-gold pl-3.5 text-cream shadow-lg"
+            whileHover={{ width: 180 }}
+            className="group fixed right-6 top-1/2 z-40 flex h-12 w-12 -translate-y-1/2 items-center justify-start overflow-hidden rounded-full bg-amber-gold pl-3.5 text-espresso shadow-lg"
           >
-            <Mail className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+            <MessageCircle className="h-4 w-4 shrink-0" strokeWidth={1.5} />
             <span className="ml-3 whitespace-nowrap text-[11px] uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity">
-              Quick Inquiry
+              Quick Message
             </span>
           </motion.button>
         )}
@@ -56,12 +69,9 @@ export function QuickInquiry() {
               {!submitted ? (
                 <>
                   <h3 className="font-display text-3xl text-espresso mb-1">A quick word.</h3>
-                  <p className="text-taupe text-sm mb-8">Leave your details — we'll call within 2 hours. Truly.</p>
+                  <p className="text-taupe text-sm mb-8">Leave your details — we'll message you on WhatsApp immediately. Truly.</p>
                   <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      setSubmitted(true);
-                    }}
+                    onSubmit={handleSubmit}
                     className="space-y-6"
                   >
                     <input
@@ -80,20 +90,24 @@ export function QuickInquiry() {
                     />
                     <button
                       type="submit"
-                      className="gold-sweep w-full bg-amber-gold text-cream py-3.5 text-xs uppercase tracking-[0.25em] hover:bg-amber-gold/90"
+                      className="gold-sweep w-full bg-amber-gold text-espresso py-3.5 text-xs uppercase tracking-[0.25em] hover:bg-amber-gold/90 font-medium"
                     >
-                      I'm Ready to Talk
+                      Send on WhatsApp
                     </button>
                   </form>
                 </>
               ) : (
                 <div className="text-center py-6">
-                  <p className="font-display text-2xl text-espresso">We'll call within 2 hours. Truly.</p>
+                  <p className="font-display text-2xl text-espresso">Message sent! We'll reach out on WhatsApp.</p>
                   <motion.div initial={{ width: 0 }} animate={{ width: 60 }} className="h-px bg-amber-gold mx-auto mt-6" />
                   <button
                     onClick={() => {
                       setOpen(false);
-                      setTimeout(() => setSubmitted(false), 400);
+                      setTimeout(() => {
+                        setSubmitted(false);
+                        setName("");
+                        setContact("");
+                      }, 400);
                     }}
                     className="mt-8 text-amber-gold text-xs uppercase tracking-[0.25em] thread-link"
                   >
