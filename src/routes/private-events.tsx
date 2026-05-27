@@ -5,19 +5,19 @@ import { SocialLinks } from "@/components/site/SocialLinks";
 import { ArrowLeft } from "lucide-react";
 import { useContent } from "@/lib/content";
 
-export const Route = createFileRoute("/weddings")({
+export const Route = createFileRoute("/private-events")({
   head: () => ({
     meta: [
-      { title: "Weddings — Mileyn Events" },
-      { name: "description", content: "Create your dream wedding with elegant, cohesive, and thoughtfully executed design." },
+      { title: "Private Events — Mileyn Events" },
+      { name: "description", content: "Intimate celebrations and private occasions, beautifully orchestrated." },
     ],
   }),
-  component: WeddingsPage,
+  component: PrivateEventsPage,
 });
 
-function WeddingsPage() {
+function PrivateEventsPage() {
   const content = useContent();
-  const heroImg = content.weddings?.heroImg || "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=75";
+  const heroImg = (content as any).privateEvents?.heroImg || "https://images.unsplash.com/photo-1530023367847-a683933f4172?auto=format&fit=crop&w=1600&q=75";
   
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -40,11 +40,18 @@ function WeddingsPage() {
   };
 
   const offerings = [
-    "Ceremony setup",
-    "Reception design",
-    "Floral styling",
-    "Table settings",
-    "Full event transformation",
+    "Milestone birthdays",
+    "Anniversary celebrations",
+    "Engagement dinners",
+    "Baby welcomes",
+    "Intimate gatherings",
+  ];
+
+  const whyChooseUs = [
+    "Discreet & personal attention",
+    "Intimate-scale expertise",
+    "Sophisticated design",
+    "Attention to your moment",
   ];
 
   return (
@@ -53,7 +60,7 @@ function WeddingsPage() {
       <section className="relative h-[70vh] min-h-[480px] w-full overflow-hidden bg-espresso text-cream">
         <motion.img
           src={heroImg}
-          alt="Wedding Design"
+          alt="Private Events"
           className="absolute inset-0 h-full w-full object-cover"
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 0.7 }}
@@ -69,14 +76,14 @@ function WeddingsPage() {
             <ArrowLeft className="h-3 w-3" />
             Back
           </Link>
-          <p className="text-amber-gold text-xs uppercase tracking-[0.4em]">Weddings</p>
+          <p className="text-amber-gold text-xs uppercase tracking-[0.4em]">Private Events</p>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.2 }}
             className="font-display text-4xl md:text-7xl text-balance mt-3 leading-[1.05]"
           >
-            Your Perfect Day
+            Your Moment, Perfectly Yours
           </motion.h1>
           <div className="mt-6">
             <GoldenThread width={56} />
@@ -84,10 +91,10 @@ function WeddingsPage() {
         </div>
       </section>
 
-      {/* Main Content */}
+      {/* Body */}
       <section className="py-20 px-6 md:px-12">
         <div className="mx-auto max-w-4xl space-y-20">
-          {/* Emotional Intro */}
+          {/* Intro Heading */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -96,14 +103,17 @@ function WeddingsPage() {
             className="space-y-6"
           >
             <h2 className="font-display text-4xl md:text-5xl leading-[1.1] text-balance">
-              Your wedding should feel effortless, beautiful, and completely you.
+              Intimate celebrations, impeccably orchestrated.
             </h2>
             <div>
               <GoldenThread width={48} />
             </div>
+            <p className="text-lg text-espresso/85 font-light leading-relaxed">
+              Milestone birthdays, anniversaries, engagement dinners, and intimate gatherings. Smaller in scale, never in care. We create moments that feel entirely yours.
+            </p>
           </motion.div>
 
-          {/* Our Approach */}
+          {/* Events We Handle */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -113,31 +123,10 @@ function WeddingsPage() {
           >
             <div>
               <p className="text-amber-gold text-xs uppercase tracking-[0.3em] font-medium mb-4">
-                Our Approach
+                Occasions We Celebrate
               </p>
               <h3 className="font-display text-3xl md:text-4xl">
-                We design weddings that are elegant, cohesive, and thoughtfully executed.
-              </h3>
-            </div>
-            <p className="text-lg md:text-xl leading-relaxed font-light text-espresso/90">
-              From the first moment a guest arrives to the last dance of the evening, every detail reflects your vision. We handle the logistics so you can focus on what matters — celebrating with the people you love.
-            </p>
-          </motion.div>
-
-          {/* What We Provide */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.9, delay: 0.2 }}
-            className="border-t border-amber-gold/20 pt-12 space-y-8"
-          >
-            <div>
-              <p className="text-amber-gold text-xs uppercase tracking-[0.3em] font-medium mb-4">
-                What We Provide
-              </p>
-              <h3 className="font-display text-3xl md:text-4xl mb-8">
-                Complete Wedding Experience
+                Intimacy, Elevated
               </h3>
             </div>
 
@@ -148,24 +137,83 @@ function WeddingsPage() {
               whileInView="visible"
               viewport={{ once: true, margin: "-80px" }}
             >
-              {offerings.map((offering, index) => (
+              {offerings.map((event) => (
                 <motion.li
-                  key={offering}
+                  key={event}
                   variants={itemVariants}
                   className="flex items-start gap-4"
                 >
                   <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-amber-gold" />
                   <span className="text-lg text-espresso/85 font-light leading-relaxed">
-                    {offering}
+                    {event}
                   </span>
                 </motion.li>
               ))}
             </motion.ul>
           </motion.div>
+
+          {/* Why Choose Us */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.9, delay: 0.2 }}
+            className="border-t border-amber-gold/20 pt-12 space-y-8"
+          >
+            <div>
+              <p className="text-amber-gold text-xs uppercase tracking-[0.3em] font-medium mb-4">
+                Why Choose Mileyn
+              </p>
+              <h3 className="font-display text-3xl md:text-4xl mb-8">
+                Your Celebration, Your Way
+              </h3>
+            </div>
+
+            <motion.ul
+              className="space-y-4"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+            >
+              {whyChooseUs.map((reason) => (
+                <motion.li
+                  key={reason}
+                  variants={itemVariants}
+                  className="flex items-start gap-4"
+                >
+                  <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-amber-gold" />
+                  <span className="text-lg text-espresso/85 font-light leading-relaxed">
+                    {reason}
+                  </span>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </motion.div>
+
+          {/* CTA Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.9, delay: 0.3 }}
+            className="border-t border-amber-gold/20 pt-12 text-center space-y-6"
+          >
+            <h3 className="font-display text-3xl md:text-4xl">
+              Let us make your moment unforgettable.
+            </h3>
+            <Link
+              to="/"
+              hash="contact"
+              className="inline-block bg-espresso text-cream px-8 py-3.5 text-xs tracking-[0.3em] uppercase hover:bg-espresso/90 transition-colors border border-espresso"
+            >
+              Begin Your Vision
+            </Link>
+          </motion.div>
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Banner */}
       <section className="bg-espresso text-cream py-20 px-6 md:px-12">
         <motion.div
           className="mx-auto max-w-4xl text-center space-y-8"
@@ -175,15 +223,11 @@ function WeddingsPage() {
           transition={{ duration: 0.9 }}
         >
           <h2 className="font-display text-3xl md:text-5xl leading-[1.1]">
-            Let's design a wedding you'll never forget.
+            Ready to celebrate?
           </h2>
-          <Link
-            to="/"
-            hash="contact"
-            className="inline-block bg-amber-gold text-espresso px-8 py-3.5 text-xs tracking-[0.3em] uppercase hover:bg-amber-gold/90 transition-colors"
-          >
-            Start Planning
-          </Link>
+          <p className="text-cream/70 font-light">
+            Reach out — we'll respond personally within 24 hours.
+          </p>
           <div className="pt-8">
             <SocialLinks tone="dark" />
           </div>

@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { DetailLayout } from "@/components/site/DetailLayout";
 import { GoldenThread } from "@/components/site/GoldenThread";
+import { useContent } from "@/lib/content";
 
 export const Route = createFileRoute("/corporate")({
   head: () => ({
@@ -17,6 +18,9 @@ export const Route = createFileRoute("/corporate")({
 });
 
 function CorporatePage() {
+  const content = useContent();
+  const heroImg = content.corporate?.heroImg || "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1600&q=75";
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -56,7 +60,7 @@ function CorporatePage() {
     <DetailLayout
       eyebrow="Corporate Events"
       title="Professional Excellence"
-      heroImg="/hero-event.jpg"
+      heroImg={heroImg}
     >
       <div className="space-y-20">
         {/* Intro Heading */}

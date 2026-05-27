@@ -20,6 +20,7 @@ import bts4 from "@/assets/team-bts-4.jpg";
 export type HeroStat = { v: string; l: string };
 export type TeamFrame = { src: string; caption: string };
 export type Testimonial = { quote: string; name: string; role: string };
+export type PageHero = { heroImg: string };
 
 export type SiteContent = {
   hero: {
@@ -43,6 +44,9 @@ export type SiteContent = {
   };
   services: Service[];
   projects: Project[];
+  corporate?: PageHero;
+  weddings?: PageHero;
+  privateEvents?: PageHero;
   team: {
     eyebrow: string;
     headingTop: string;
@@ -97,6 +101,15 @@ export const DEFAULT_CONTENT: SiteContent = {
   },
   services: DEFAULT_SERVICES,
   projects: DEFAULT_PROJECTS,
+  corporate: {
+    heroImg: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1600&q=75",
+  },
+  weddings: {
+    heroImg: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=75",
+  },
+  privateEvents: {
+    heroImg: "https://images.unsplash.com/photo-1530023367847-a683933f4172?auto=format&fit=crop&w=1600&q=75",
+  },
   team: {
     eyebrow: "Behind The Curtain",
     headingTop: "The hands that",

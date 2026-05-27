@@ -33,7 +33,7 @@ function PortfolioPage() {
       fn: (type: string) => type.includes("Corporate") || type.includes("Gala") || type.includes("Launch"),
     },
     private: {
-      label: "Private",
+      label: "Private Events",
       fn: (type: string) => type.includes("Private") || type.includes("Anniversary") || type.includes("Celebration"),
     },
   };

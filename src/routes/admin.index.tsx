@@ -9,6 +9,7 @@ import { ProjectsManager } from "@/components/admin/ProjectsManager";
 import { TextInput } from "@/components/admin/TextInput";
 import { TextArea } from "@/components/admin/TextArea";
 import { ArrayManager } from "@/components/admin/ArrayManager";
+import { ImageUploader } from "@/components/admin/ImageUploader";
 
 export const Route = createFileRoute("/admin/")({
   beforeLoad: async () => {
@@ -21,13 +22,16 @@ export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
 });
 
-type Tab = "hero" | "about" | "services" | "projects" | "team" | "teamFull" | "testimonials" | "social" | "footer";
+type Tab = "hero" | "about" | "services" | "projects" | "corporate" | "weddings" | "privateEvents" | "team" | "teamFull" | "testimonials" | "social" | "footer";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "hero", label: "Hero" },
   { id: "about", label: "About" },
   { id: "services", label: "Services" },
   { id: "projects", label: "Portfolio" },
+  { id: "corporate", label: "Corporate Events" },
+  { id: "weddings", label: "Weddings" },
+  { id: "privateEvents", label: "Private Events" },
   { id: "team", label: "Team Collage" },
   { id: "teamFull", label: "Team Bios" },
   { id: "testimonials", label: "Testimonials" },
@@ -170,6 +174,38 @@ function AdminDashboard() {
         {tab === "about" && <AboutEditor about={content.about} onChange={(about) => update("about", about)} />}
         {tab === "services" && <ServicesManager services={content.services} onChange={(services) => update("services", services)} />}
         {tab === "projects" && <ProjectsManager projects={content.projects} onChange={(projects) => update("projects", projects)} />}
+
+        {/* Page Hero Images */}
+        {tab === "corporate" && (
+          <div className="space-y-6">
+            <h3 className="font-display text-xl text-amber-gold">Corporate Events Hero Image</h3>
+            <ImageUploader
+              value={content.corporate?.heroImg || ""}
+              onChange={(heroImg) => update("corporate", { heroImg })}
+              label="Hero Image"
+            />
+          </div>
+        )}
+        {tab === "weddings" && (
+          <div className="space-y-6">
+            <h3 className="font-display text-xl text-amber-gold">Weddings Hero Image</h3>
+            <ImageUploader
+              value={content.weddings?.heroImg || ""}
+              onChange={(heroImg) => update("weddings", { heroImg })}
+              label="Hero Image"
+            />
+          </div>
+        )}
+        {tab === "privateEvents" && (
+          <div className="space-y-6">
+            <h3 className="font-display text-xl text-amber-gold">Private Events Hero Image</h3>
+            <ImageUploader
+              value={content.privateEvents?.heroImg || ""}
+              onChange={(heroImg) => update("privateEvents", { heroImg })}
+              label="Hero Image"
+            />
+          </div>
+        )}
 
         {tab === "team" && (
           <div className="space-y-6">

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WeddingsRouteImport } from './routes/weddings'
 import { Route as TeamRouteImport } from './routes/team'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as PrivateEventsRouteImport } from './routes/private-events'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as CorporateRouteImport } from './routes/corporate'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -35,6 +36,11 @@ const TeamRoute = TeamRouteImport.update({
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivateEventsRoute = PrivateEventsRouteImport.update({
+  id: '/private-events',
+  path: '/private-events',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortfolioRoute = PortfolioRouteImport.update({
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/corporate': typeof CorporateRoute
   '/portfolio': typeof PortfolioRouteWithChildren
+  '/private-events': typeof PrivateEventsRoute
   '/services': typeof ServicesRouteWithChildren
   '/team': typeof TeamRoute
   '/weddings': typeof WeddingsRoute
@@ -103,6 +110,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/corporate': typeof CorporateRoute
   '/portfolio': typeof PortfolioRouteWithChildren
+  '/private-events': typeof PrivateEventsRoute
   '/services': typeof ServicesRouteWithChildren
   '/team': typeof TeamRoute
   '/weddings': typeof WeddingsRoute
@@ -118,6 +126,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/corporate': typeof CorporateRoute
   '/portfolio': typeof PortfolioRouteWithChildren
+  '/private-events': typeof PrivateEventsRoute
   '/services': typeof ServicesRouteWithChildren
   '/team': typeof TeamRoute
   '/weddings': typeof WeddingsRoute
@@ -134,6 +143,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/corporate'
     | '/portfolio'
+    | '/private-events'
     | '/services'
     | '/team'
     | '/weddings'
@@ -148,6 +158,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/corporate'
     | '/portfolio'
+    | '/private-events'
     | '/services'
     | '/team'
     | '/weddings'
@@ -162,6 +173,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/corporate'
     | '/portfolio'
+    | '/private-events'
     | '/services'
     | '/team'
     | '/weddings'
@@ -177,6 +189,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   CorporateRoute: typeof CorporateRoute
   PortfolioRoute: typeof PortfolioRouteWithChildren
+  PrivateEventsRoute: typeof PrivateEventsRoute
   ServicesRoute: typeof ServicesRouteWithChildren
   TeamRoute: typeof TeamRoute
   WeddingsRoute: typeof WeddingsRoute
@@ -205,6 +218,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/private-events': {
+      id: '/private-events'
+      path: '/private-events'
+      fullPath: '/private-events'
+      preLoaderRoute: typeof PrivateEventsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/portfolio': {
@@ -303,6 +323,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   CorporateRoute: CorporateRoute,
   PortfolioRoute: PortfolioRouteWithChildren,
+  PrivateEventsRoute: PrivateEventsRoute,
   ServicesRoute: ServicesRouteWithChildren,
   TeamRoute: TeamRoute,
   WeddingsRoute: WeddingsRoute,
