@@ -71,8 +71,7 @@ export function Services() {
                 <h3 className="font-display text-2xl text-espresso">{s.name}</h3>
                 <p className="mt-2 text-sm text-taupe font-light">{s.tagline}</p>
                 <Link
-                  to="/services/$slug"
-                  params={{ slug: s.slug }}
+                  to={`/services/${s.slug}`}
                   className="thread-link mt-5 inline-block text-amber-gold text-xs uppercase tracking-[0.25em] font-medium glow-gold-text"
                 >
                   {SERVICE_CTAS[i % SERVICE_CTAS.length]} →

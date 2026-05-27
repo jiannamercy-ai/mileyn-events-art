@@ -41,7 +41,7 @@ export function Portfolio() {
               transition={{ duration: 0.6, delay: i * 0.05 }}
               className="group relative aspect-[3/4] overflow-hidden bg-charcoal"
             >
-              <Link to="/portfolio/$slug" params={{ slug: item.slug }} className="block h-full w-full">
+              <Link to={`/portfolio/${item.slug}`} className="block h-full w-full cursor-pointer">
                 <img
                   src={item.img}
                   alt={item.name}
