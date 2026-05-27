@@ -154,29 +154,30 @@ function PortfolioPage() {
                 <motion.div
                   key={project.slug}
                   variants={itemVariants}
-                  className="group cursor-pointer"
-                  onClick={() => window.location.href = `/portfolio/${project.slug}`}
+                  className="group"
                 >
                   {/* Card Container */}
                   <div className="space-y-4">
                     {/* Image Container with Hover Effect */}
-                    <div className="relative overflow-hidden aspect-[4/3] bg-espresso/5">
-                      <motion.img
-                        src={project.img}
-                        alt={project.name}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        loading="lazy"
-                      />
-                      {/* Overlay on Hover */}
-                      <motion.div
-                        className="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/20 transition-colors duration-300"
-                        initial={false}
-                      />
-                    </div>
+                    <Link to={`/portfolio/${project.slug}`} className="block">
+                      <div className="relative overflow-hidden aspect-[4/3] bg-espresso/5">
+                        <motion.img
+                          src={project.img}
+                          alt={project.name}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.6 }}
+                          loading="lazy"
+                        />
+                        {/* Overlay on Hover */}
+                        <motion.div
+                          className="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/20 transition-colors duration-300"
+                          initial={false}
+                        />
+                      </div>
+                    </Link>
 
                     {/* Project Info */}
                     <div className="space-y-3">
