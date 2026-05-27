@@ -119,7 +119,11 @@ export function Contact() {
                 <Field label="Email" name="email" type="email" required />
                 <Field label="Phone" name="phone" type="tel" />
                 <SelectField label="Event Type" name="eventType" options={EVENT_TYPES} />
-                <Field label="Message" name="message" textarea placeholder="Tell us about the experience you envision..." className="md:col-span-2" />
+                <Field label="Event Date" name="eventDate" type="date" />
+                <Field label="Guest Count" name="guestCount" type="number" placeholder="e.g. 150" />
+                <Field label="Venue" name="venue" placeholder="Venue or city if undecided" />
+                <SelectField label="Budget Range" name="budget" options={BUDGET_RANGES} />
+                <Field label="Tell Us About Your Event" name="message" textarea placeholder="Vision, theme, anything that matters to you..." className="md:col-span-2" />
 
                 <div className="md:col-span-2 mt-4">
                   <motion.button
