@@ -26,11 +26,11 @@ export function FinalCTA() {
           <em className="font-light italic text-amber-gold">Exceptional</em>
         </h2>
         <p className="mt-6 text-cream/80 text-base md:text-lg font-light max-w-xl mx-auto">
-          Tell us about your event and we'll guide you through the process — from concept to flawless execution.
+          Tell us about your event and we'll guide you through the process.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-4">
           <a
-            href="#contact"
+            href="/contact"
             className="gold-sweep bg-amber-gold text-espresso px-8 py-4 text-xs tracking-[0.3em] uppercase font-medium hover:bg-amber-gold/90 transition-colors"
           >
             Request a Proposal

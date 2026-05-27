@@ -13,7 +13,15 @@ const SERVICE_CTAS = [
 ];
 
 export function Services() {
-  const SERVICES = useContent().services;
+  const allServices = useContent().services;
+  const FEATURED_SLUGS = [
+    "event-production",
+    "event-design-styling",
+    "tent-infrastructure",
+    "premium-rentals",
+  ];
+  const SERVICES = allServices.filter((s) => FEATURED_SLUGS.includes(s.slug));
+
   return (
     <section id="services" className="relative bg-cream text-espresso py-28 px-6 md:px-12">
       <div className="mx-auto max-w-7xl">
@@ -30,11 +38,11 @@ export function Services() {
           <h2 className="font-display text-4xl md:text-6xl mt-4">End-to-end event solutions</h2>
           <div className="mt-5 flex justify-center"><GoldenThread width={48} /></div>
           <p className="mt-6 text-taupe text-lg font-light max-w-xl mx-auto">
-            Tailored to your vision, your guests, and your standards — from concept to flawless execution.
+            We provide end-to-end event solutions tailored to your vision, your guests, and your standards.
           </p>
         </motion.div>
 
-        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-2 gap-8">
           {SERVICES.map((s, i) => (
             <motion.article
               key={s.slug}
@@ -73,6 +81,21 @@ export function Services() {
             </motion.article>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-16 flex justify-center"
+        >
+          <Link
+            to="/services"
+            className="inline-block px-8 py-3 bg-amber-gold text-espresso font-medium text-sm uppercase tracking-[0.15em] hover:bg-amber-gold/90 transition-all duration-300 hover:shadow-lg"
+          >
+            Explore Services
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

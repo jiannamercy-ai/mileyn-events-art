@@ -1,21 +1,22 @@
 import { motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 
 const BLOCKS = [
   {
     eyebrow: "Corporate Events",
     title: "Precision-driven execution",
-    body: "For brands, organizations, and institutions. Product launches, conferences, award ceremonies, corporate dinners and brand activations — structured, professional, on-brand.",
+    body: "Precision-driven execution for brands, organizations, and institutions.",
     img: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1400&q=75",
     cta: "Explore Corporate Events",
-    href: "#services",
+    href: "/corporate",
   },
   {
-    eyebrow: "Weddings & Private",
+    eyebrow: "Weddings & Private Events",
     title: "Beautifully designed celebrations",
-    body: "Tailored to your story. From ceremony setup and reception design to floral styling and full event transformation — elegant, cohesive, thoughtfully executed.",
+    body: "Beautifully designed celebrations tailored to your story.",
     img: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=75",
     cta: "Explore Weddings",
-    href: "#services",
+    href: "/weddings",
   },
 ];
 
@@ -40,15 +41,17 @@ export function CorporateWeddingSplit() {
 
         <div className="grid md:grid-cols-2 gap-6 lg:gap-10">
           {BLOCKS.map((b, i) => (
-            <motion.a
+            <motion.div
               key={b.eyebrow}
-              href={b.href}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.8, delay: i * 0.1 }}
-              className="group relative block overflow-hidden bg-espresso text-cream"
             >
+              <Link
+                to={b.href}
+                className="group relative block overflow-hidden bg-espresso text-cream"
+              >
               <div className="aspect-[4/3] overflow-hidden">
                 <img
                   src={b.img}
@@ -70,7 +73,8 @@ export function CorporateWeddingSplit() {
                   {b.cta} →
                 </span>
               </div>
-            </motion.a>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </div>

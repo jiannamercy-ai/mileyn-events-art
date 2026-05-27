@@ -151,6 +151,94 @@ export const SERVICES: Service[] = [
     signature: "Available as a stand-alone hire.",
     starting: "From KSh 320K",
   },
+  {
+    slug: "event-production",
+    name: "Event Production",
+    tagline: "Full-scale production excellence.",
+    img: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=75",
+    intro:
+      "From concept through execution, we manage every technical and logistical element of your event with precision and expertise.",
+    whatsIncluded: [
+      "End-to-end event planning & coordination",
+      "Timeline & run-of-show development",
+      "Vendor management & logistics",
+      "On-site production direction",
+      "Risk management & contingency planning",
+    ],
+    process: [
+      { title: "Plan", body: "We develop detailed timelines and coordinate all moving parts." },
+      { title: "Prepare", body: "Vendor coordination, rehearsals, and contingency planning." },
+      { title: "Produce", body: "On-site management ensuring seamless execution." },
+    ],
+    signature: "Scalable for events of any size.",
+    starting: "From KSh 320K",
+  },
+  {
+    slug: "event-design-styling",
+    name: "Event Design & Styling",
+    tagline: "Aesthetic vision brought to life.",
+    img: "https://images.unsplash.com/photo-1487530811176-3780de880c2d?auto=format&fit=crop&w=1600&q=75",
+    intro:
+      "Our design team creates cohesive, memorable environments that reflect your vision through thoughtful styling and creative direction.",
+    whatsIncluded: [
+      "Creative concept & mood development",
+      "Color palette & design board creation",
+      "Space planning & layout architecture",
+      "Décor installation & styling",
+      "Lighting & ambiance design",
+    ],
+    process: [
+      { title: "Concept", body: "We develop a creative vision aligned with your goals." },
+      { title: "Design", body: "Detailed mood boards and spatial planning." },
+      { title: "Install", body: "Our team brings the design to life on-site." },
+    ],
+    signature: "Available as standalone or integrated service.",
+    starting: "From KSh 250K",
+  },
+  {
+    slug: "tent-infrastructure",
+    name: "Tent & Infrastructure Solutions",
+    tagline: "Structural elegance for outdoor events.",
+    img: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1600&q=75",
+    intro:
+      "We source and install premium tent structures, flooring, and infrastructure that combine functionality with aesthetic excellence.",
+    whatsIncluded: [
+      "Tent selection & sizing consultation",
+      "Flooring & foundation solutions",
+      "Lighting & climate control integration",
+      "Setup, installation & breakdown",
+      "Structural safety & compliance",
+    ],
+    process: [
+      { title: "Survey", body: "We assess your venue and design appropriate structures." },
+      { title: "Source", body: "Premium suppliers for tents, flooring, and utilities." },
+      { title: "Install", body: "Professional setup ensuring stability and aesthetics." },
+    ],
+    signature: "Ideal for garden, rooftop, and outdoor venues.",
+    starting: "From KSh 400K",
+  },
+  {
+    slug: "premium-rentals",
+    name: "Premium Event Rentals",
+    tagline: "Curated furnishings for elevated occasions.",
+    img: "https://images.unsplash.com/photo-1530023367847-a683933f4172?auto=format&fit=crop&w=1600&q=75",
+    intro:
+      "Hand-selected furniture, linens, glassware, and décor pieces that elevate your event with sophistication and style.",
+    whatsIncluded: [
+      "Furniture & seating selection",
+      "Premium linens & table settings",
+      "Glassware, china & flatware",
+      "Décor accessories & centerpieces",
+      "Delivery, setup & styling",
+    ],
+    process: [
+      { title: "Consult", body: "We understand your aesthetic and recommend pieces." },
+      { title: "Curate", body: "Selection of items that create cohesive environments." },
+      { title: "Deliver", body: "Professional setup and styling services included." },
+    ],
+    signature: "Quality over quantity — always.",
+    starting: "From KSh 150K",
+  },
 ];
 
 export type Project = {
@@ -171,7 +259,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "the-pearl-wedding",
     name: "The Pearl Wedding",
-    type: "Wedding",
+    type: "Wedding Destination",
     location: "Karen, Nairobi",
     guests: "180 guests",
     date: "October 2024",
@@ -192,7 +280,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "the-executive-gala",
     name: "The Executive Gala",
-    type: "Corporate Gala",
+    type: "Corporate Gala Launch",
     location: "Villa Rosa Kempinski",
     guests: "420 guests",
     date: "December 2024",
@@ -208,7 +296,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "garden-soiree",
     name: "Garden Soirée",
-    type: "Private Celebration",
+    type: "Private Anniversary",
     location: "Limuru",
     guests: "60 guests",
     date: "March 2024",
@@ -223,7 +311,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "coastal-vow",
     name: "Coastal Vow",
-    type: "Destination Wedding",
+    type: "Wedding Destination",
     location: "Diani Beach",
     guests: "90 guests",
     date: "August 2024",
@@ -238,7 +326,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "velvet-hour",
     name: "Velvet Hour",
-    type: "Product Launch",
+    type: "Corporate Launch",
     location: "The Alchemist, Westlands",
     guests: "300 guests",
     date: "May 2024",
@@ -253,7 +341,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "brass-and-linen",
     name: "Brass & Linen",
-    type: "Anniversary Dinner",
+    type: "Private Anniversary Celebration",
     location: "Private Residence, Runda",
     guests: "24 guests",
     date: "July 2024",

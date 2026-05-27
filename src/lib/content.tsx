@@ -61,8 +61,8 @@ export const DEFAULT_CONTENT: SiteContent = {
   hero: {
     image: heroImage,
     headline: "We Design & Deliver",
-    headlineEm: "Exceptional",
-    headlineTail: "Events That Feel Effortless",
+    headlineEm: "Exceptional Events That Feel Effortless",
+    headlineTail: "",
     subhead:
       "From luxury weddings to high-level corporate experiences, Mileyn Events transforms spaces into unforgettable environments — with precision, elegance, and seamless execution.",
     ctaPrimary: "View Our Work",
@@ -120,7 +120,7 @@ export const DEFAULT_CONTENT: SiteContent = {
   social: DEFAULT_SOCIAL,
   footer: {
     tagline: "Complete event experiences — designed, produced, delivered.",
-    copyright: "© 2025 Mileyn Events Services Ltd. All rights reserved.",
+    copyright: "© 2026 Mileyn Events Services Ltd. All rights reserved.",
   },
 };
 

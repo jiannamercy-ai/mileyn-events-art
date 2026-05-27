@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 
 const LINKS = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Team", href: "#team" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Corporate", href: "/corporate" },
+  { label: "Weddings", href: "/weddings" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar({ visible }: { visible: boolean }) {
@@ -37,24 +39,24 @@ export function Navbar({ visible }: { visible: boolean }) {
 
         <div className="hidden items-center gap-10 md:flex">
           {LINKS.map((l) => (
-            <a
+            <Link
               key={l.href}
-              href={l.href}
+              to={l.href as any}
               className={`thread-link text-[13px] tracking-wide font-body font-light ${
                 scrolled ? "text-espresso" : "text-cream"
               }`}
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </div>
 
-        <a
-          href="#contact"
+        <Link
+          to="/contact"
           className="hidden md:inline-flex gold-sweep items-center justify-center bg-amber-gold text-cream px-5 py-2.5 text-[12px] tracking-[0.18em] uppercase font-body font-medium hover:bg-amber-gold/90 transition-colors"
         >
           Begin Your Vision
-        </a>
+        </Link>
 
         <button
           onClick={() => setOpen((v) => !v)}
@@ -84,23 +86,23 @@ export function Navbar({ visible }: { visible: boolean }) {
       >
         <div className="flex flex-col px-8 py-6 gap-4">
           {LINKS.map((l, i) => (
-            <a
+            <Link
               key={l.href}
-              href={l.href}
+              to={l.href as any}
               onClick={() => setOpen(false)}
               className="text-espresso font-display text-2xl py-3 border-b border-amber-gold/30"
             >
               {l.label}
               {i === LINKS.length - 1 ? null : null}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             onClick={() => setOpen(false)}
             className="mt-3 bg-amber-gold text-cream px-5 py-3 text-center tracking-widest uppercase text-xs"
           >
             Begin Your Vision
-          </a>
+          </Link>
         </div>
       </motion.div>
     </motion.nav>

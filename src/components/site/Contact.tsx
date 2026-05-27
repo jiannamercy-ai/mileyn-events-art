@@ -116,34 +116,46 @@ export function Contact() {
                 className="grid md:grid-cols-2 gap-x-8 gap-y-6"
               >
                 <Field label="Name" name="name" required />
+                <Field label="Phone" name="phone" type="tel" required />
                 <Field label="Email" name="email" type="email" required />
-                <Field label="Phone" name="phone" type="tel" />
-                <SelectField label="Event Type" name="eventType" options={EVENT_TYPES} />
                 <Field label="Event Date" name="eventDate" type="date" />
                 <Field label="Guest Count" name="guestCount" type="number" placeholder="e.g. 150" />
                 <Field label="Venue" name="venue" placeholder="Venue or city if undecided" />
+                <SelectField label="Event Type" name="eventType" options={EVENT_TYPES} />
                 <SelectField label="Budget Range" name="budget" options={BUDGET_RANGES} />
                 <Field label="Tell Us About Your Event" name="message" textarea placeholder="Vision, theme, anything that matters to you..." className="md:col-span-2" />
 
                 <div className="md:col-span-2 mt-4">
-                  <motion.button
-                    type="submit"
-                    animate={pulsing ? { scale: [1, 1.05, 1] } : {}}
-                    transition={{ duration: 0.4 }}
-                    className="gold-sweep w-full md:w-auto bg-amber-gold text-espresso font-medium px-12 py-4 text-xs tracking-[0.3em] uppercase hover:bg-amber-gold/90 transition-colors relative overflow-hidden shadow-[0_15px_35px_-12px_rgba(200,169,126,0.7)]"
-                  >
-                    Send To Email & WhatsApp
-                    {pulsing && (
-                      <motion.span
-                        className="absolute inset-0 bg-amber-gold rounded-full"
-                        initial={{ scale: 0, opacity: 0.5 }}
-                        animate={{ scale: 8, opacity: 0 }}
-                        transition={{ duration: 0.8 }}
-                      />
-                    )}
-                  </motion.button>
+                  <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
+                    <motion.button
+                      type="submit"
+                      animate={pulsing ? { scale: [1, 1.05, 1] } : {}}
+                      transition={{ duration: 0.4 }}
+                      className="gold-sweep bg-amber-gold text-espresso font-medium px-12 py-4 text-xs tracking-[0.3em] uppercase hover:bg-amber-gold/90 transition-colors relative overflow-hidden shadow-[0_15px_35px_-12px_rgba(200,169,126,0.7)]"
+                    >
+                      Submit Inquiry
+                      {pulsing && (
+                        <motion.span
+                          className="absolute inset-0 bg-amber-gold rounded-full"
+                          initial={{ scale: 0, opacity: 0.5 }}
+                          animate={{ scale: 8, opacity: 0 }}
+                          transition={{ duration: 0.8 }}
+                        />
+                      )}
+                    </motion.button>
+                    <motion.button
+                      type="button"
+                      onClick={() => {
+                        const waNumber = SOCIAL.whatsapp.replace(/[^0-9]/g, "");
+                        window.open(`https://wa.me/${waNumber}`, "_blank", "noopener,noreferrer");
+                      }}
+                      className="bg-transparent border-2 border-amber-gold text-amber-gold font-medium px-12 py-4 text-xs tracking-[0.3em] uppercase hover:bg-amber-gold hover:text-espresso transition-colors"
+                    >
+                      Chat on WhatsApp
+                    </motion.button>
+                  </div>
                   <p className="mt-3 text-[11px] text-taupe">
-                    Pressing send opens WhatsApp <span className="text-amber-gold">and</span> your mail app, both pre-filled. One inquiry, two channels.
+                    Submit your inquiry to receive a response in both email <span className="text-amber-gold">and</span> WhatsApp within 24 hours.
                   </p>
                 </div>
               </motion.form>

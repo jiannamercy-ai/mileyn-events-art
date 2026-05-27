@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 import { useContent } from "@/lib/content";
 
 export function Hero({ ready }: { ready: boolean }) {
@@ -56,18 +57,18 @@ export function Hero({ ready }: { ready: boolean }) {
           animate={ready ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 1.0 }}
         >
-          <a
-            href="#portfolio"
+          <Link
+            to="/portfolio"
             className="gold-sweep border border-amber-gold text-amber-gold hover:bg-amber-gold hover:text-espresso px-7 py-3.5 text-xs tracking-[0.25em] uppercase font-medium transition-colors"
           >
             {c.ctaPrimary}
-          </a>
-          <a
-            href="#contact"
+          </Link>
+          <Link
+            to="/contact"
             className="gold-sweep bg-amber-gold text-espresso hover:bg-amber-gold/90 px-7 py-3.5 text-xs tracking-[0.25em] uppercase font-medium transition-colors"
           >
             {c.ctaSecondary}
-          </a>
+          </Link>
         </motion.div>
 
         <motion.div
