@@ -14,7 +14,7 @@ interface ProjectsManagerProps {
 }
 
 export function ProjectsManager({ projects, onChange, disabled }: ProjectsManagerProps) {
-  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(projects[0]?.slug || null);
 
   const createNewProject = (): Project => ({
     slug: `project-${Date.now()}`,
@@ -31,7 +31,9 @@ export function ProjectsManager({ projects, onChange, disabled }: ProjectsManage
   });
 
   const addProject = () => {
-    onChange([...projects, createNewProject()]);
+    const newProject = createNewProject();
+    onChange([...projects, newProject]);
+    setEditingId(newProject.slug);
   };
 
   const updateProject = (slug: string, updates: Partial<Project>) => {
@@ -43,7 +45,9 @@ export function ProjectsManager({ projects, onChange, disabled }: ProjectsManage
   const removeProject = (slug: string) => {
     if (confirm("Are you sure you want to delete this project?")) {
       onChange(projects.filter((p) => p.slug !== slug));
-      setEditingId(null);
+      if (editingId === slug) {
+        setEditingId(projects[0]?.slug || null);
+      }
     }
   };
 
@@ -62,6 +66,25 @@ export function ProjectsManager({ projects, onChange, disabled }: ProjectsManage
           Add Project
         </button>
       </div>
+
+      {/* Quick Navigation Tabs */}
+      {projects.length > 0 && (
+        <div className="flex flex-wrap gap-2 pb-4 border-b border-amber-gold/30">
+          {projects.map((project) => (
+            <button
+              key={project.slug}
+              onClick={() => setEditingId(project.slug)}
+              className={`px-3 py-1.5 text-xs uppercase tracking-[0.15em] border rounded transition-all ${
+                editingId === project.slug
+                  ? "border-amber-gold bg-amber-gold/20 text-amber-gold"
+                  : "border-cream/20 text-cream/70 hover:border-amber-gold/50 hover:text-amber-gold"
+              }`}
+            >
+              {project.name || "Untitled"}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Projects List */}
       <div className="space-y-2">
