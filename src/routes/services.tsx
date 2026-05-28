@@ -94,15 +94,11 @@ function ServicesPage() {
     <main className="bg-cream text-espresso min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[60vh] min-h-[420px] w-full overflow-hidden bg-espresso text-cream py-24 px-6 md:px-12">
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <motion.img
-            src={heroImg}
-            alt="Services hero background"
-            className="absolute inset-0 h-full w-full object-cover"
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-          />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-cover bg-center"
+          style={{ backgroundImage: `url(${heroImg})` }}
+        >
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
         </div>
         <div className="relative z-10 mx-auto max-w-6xl">
