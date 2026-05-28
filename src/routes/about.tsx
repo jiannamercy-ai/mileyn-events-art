@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { GoldenThread } from "@/components/site/GoldenThread";
 import { SocialLinks } from "@/components/site/SocialLinks";
+import { useContent } from "@/lib/content";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -48,10 +49,24 @@ function AboutPage() {
     "We prioritize professional delivery, not guesswork",
   ];
 
+  const content = useContent();
+  const heroImg = content.about.image || content.hero.image;
+
   return (
     <main className="bg-cream text-espresso min-h-screen">
       {/* Hero/Intro Section */}
-      <section className="relative bg-espresso text-cream py-32 px-6 md:px-12">
+      <section className="relative py-32 px-6 md:px-12 text-cream">
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <motion.img
+            src={heroImg}
+            alt="About hero background"
+            className="absolute inset-0 h-full w-full object-cover"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/70" />
+        </div>
         <div className="mx-auto max-w-6xl">
           <Link
             to="/"

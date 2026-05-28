@@ -22,7 +22,7 @@ export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
 });
 
-type Tab = "hero" | "about" | "services" | "projects" | "portfolio" | "corporate" | "weddings" | "privateEvents" | "team" | "teamFull" | "testimonials" | "social" | "footer";
+type Tab = "hero" | "about" | "services" | "projects" | "portfolio" | "servicesPage" | "contact" | "corporate" | "weddings" | "privateEvents" | "team" | "teamFull" | "testimonials" | "social" | "footer";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "hero", label: "Hero" },
@@ -30,6 +30,8 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "services", label: "Services" },
   { id: "projects", label: "Portfolio" },
   { id: "portfolio", label: "Portfolio Hero" },
+  { id: "servicesPage", label: "Services Hero" },
+  { id: "contact", label: "Contact Hero" },
   { id: "corporate", label: "Corporate Events" },
   { id: "weddings", label: "Weddings" },
   { id: "privateEvents", label: "Private Events" },
@@ -183,6 +185,26 @@ function AdminDashboard() {
             <ImageUploader
               value={content.portfolio?.heroImg || ""}
               onChange={(heroImg) => update("portfolio", { heroImg })}
+              label="Hero Image"
+            />
+          </div>
+        )}
+        {tab === "servicesPage" && (
+          <div className="space-y-6">
+            <h3 className="font-display text-xl text-amber-gold">Services Page Hero Image</h3>
+            <ImageUploader
+              value={content.servicesPage?.heroImg || ""}
+              onChange={(heroImg) => update("servicesPage", { heroImg })}
+              label="Hero Image"
+            />
+          </div>
+        )}
+        {tab === "contact" && (
+          <div className="space-y-6">
+            <h3 className="font-display text-xl text-amber-gold">Contact Page Hero Image</h3>
+            <ImageUploader
+              value={content.contact?.heroImg || ""}
+              onChange={(heroImg) => update("contact", { heroImg })}
               label="Hero Image"
             />
           </div>
