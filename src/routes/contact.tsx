@@ -48,7 +48,7 @@ function ContactPage() {
       <Navbar visible={true} />
 
       {/* Hero/Intro Section */}
-      <section className="relative pt-32 pb-20 px-6 md:px-12 text-cream">
+      <section className="relative h-[60vh] min-h-[420px] w-full overflow-hidden bg-espresso text-cream pt-32 pb-20 px-6 md:px-12">
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <motion.img
             src={heroImg}
@@ -58,9 +58,9 @@ function ContactPage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
         </div>
-        <div className="mx-auto max-w-6xl">
+        <div className="relative z-10 mx-auto max-w-6xl">
           <Link
             to="/"
             className="inline-flex items-center gap-2 text-amber-gold text-xs uppercase tracking-[0.3em] hover:text-cream transition-colors"
