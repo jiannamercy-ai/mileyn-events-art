@@ -19,8 +19,10 @@ export const Route = createFileRoute("/portfolio")({
 type FilterCategory = "weddings" | "corporate" | "private";
 
 function PortfolioPage() {
-  const projects = useContent().projects;
-  const SOCIAL = useContent().social;
+  const content = useContent();
+  const projects = content.projects;
+  const SOCIAL = content.social;
+  const heroImg = content.portfolio?.heroImg || projects[0]?.img || content.hero.image;
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("weddings");
 
   const filterConfig = {
@@ -159,7 +161,7 @@ function PortfolioPage() {
                   {/* Card Container */}
                   <div className="space-y-4">
                     {/* Image Container with Hover Effect */}
-                    <Link to={`/portfolio/${project.slug}`} className="block">
+                    <Link to={`/project/${project.slug}`} className="block">
                       <div className="relative overflow-hidden aspect-[4/3] bg-espresso/5">
                         <motion.img
                           src={project.img}
@@ -196,7 +198,7 @@ function PortfolioPage() {
 
                       {/* Link */}
                       <Link
-                        to={`/portfolio/${project.slug}`}
+                        to={`/project/${project.slug}`}
                         className="inline-flex items-center gap-2 text-amber-gold text-xs uppercase tracking-[0.2em] group-hover:gap-3 transition-all"
                       >
                         View Project <span>→</span>

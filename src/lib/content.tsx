@@ -47,6 +47,7 @@ export type SiteContent = {
   corporate?: PageHero;
   weddings?: PageHero;
   privateEvents?: PageHero;
+  portfolio?: PageHero;
   team: {
     eyebrow: string;
     headingTop: string;
@@ -109,6 +110,9 @@ export const DEFAULT_CONTENT: SiteContent = {
   },
   privateEvents: {
     heroImg: "https://images.unsplash.com/photo-1530023367847-a683933f4172?auto=format&fit=crop&w=1600&q=75",
+  },
+  portfolio: {
+    heroImg: heroImage,
   },
   team: {
     eyebrow: "Behind The Curtain",

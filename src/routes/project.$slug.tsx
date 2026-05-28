@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ProjectDetail } from "@/pages/ProjectDetail";
 
-export const Route = createFileRoute("/portfolio/$slug")({
+export const Route = createFileRoute("/project/$slug")({
   head: ({ params }) => ({
     meta: [{ title: `${params.slug} — Mileyn Events` }],
   }),
-  component: ProjectPage,
+  component: ProjectRoute,
 });
 
-function ProjectPage() {
+function ProjectRoute() {
   const { slug } = Route.useParams();
   return <ProjectDetail slug={slug} />;
 }
