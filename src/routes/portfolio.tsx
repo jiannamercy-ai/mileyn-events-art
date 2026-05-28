@@ -66,11 +66,21 @@ function PortfolioPage() {
     <main className="bg-cream text-espresso min-h-screen">
       <Navbar visible={true} />
       {/* Header Section */}
-      <section className="bg-espresso text-cream py-24 px-6 md:px-12">
-        <div className="mx-auto max-w-6xl">
+      <section className="relative h-[70vh] min-h-[420px] w-full overflow-hidden bg-espresso text-cream">
+        <motion.img
+          src={heroImg}
+          alt="Our Work"
+          className="absolute inset-0 h-full w-full object-cover"
+          initial={{ scale: 1.06, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.75 }}
+          transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-espresso via-espresso/50 to-espresso/40" />
+
+        <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col justify-end px-6 pb-16 md:px-12">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-amber-gold text-xs uppercase tracking-[0.3em] hover:text-cream transition-colors"
+            className="inline-flex items-center gap-2 text-amber-gold text-xs uppercase tracking-[0.3em] hover:text-cream transition-colors w-fit"
           >
             ← Back
           </Link>
