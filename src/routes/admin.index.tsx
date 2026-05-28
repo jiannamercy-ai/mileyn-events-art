@@ -22,13 +22,14 @@ export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
 });
 
-type Tab = "hero" | "about" | "services" | "projects" | "corporate" | "weddings" | "privateEvents" | "team" | "teamFull" | "testimonials" | "social" | "footer";
+type Tab = "hero" | "about" | "services" | "projects" | "portfolio" | "corporate" | "weddings" | "privateEvents" | "team" | "teamFull" | "testimonials" | "social" | "footer";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "hero", label: "Hero" },
   { id: "about", label: "About" },
   { id: "services", label: "Services" },
   { id: "projects", label: "Portfolio" },
+  { id: "portfolio", label: "Portfolio Hero" },
   { id: "corporate", label: "Corporate Events" },
   { id: "weddings", label: "Weddings" },
   { id: "privateEvents", label: "Private Events" },
@@ -176,6 +177,16 @@ function AdminDashboard() {
         {tab === "projects" && <ProjectsManager projects={content.projects} onChange={(projects) => update("projects", projects)} />}
 
         {/* Page Hero Images */}
+        {tab === "portfolio" && (
+          <div className="space-y-6">
+            <h3 className="font-display text-xl text-amber-gold">Portfolio Page Hero Image</h3>
+            <ImageUploader
+              value={content.portfolio?.heroImg || ""}
+              onChange={(heroImg) => update("portfolio", { heroImg })}
+              label="Hero Image"
+            />
+          </div>
+        )}
         {tab === "corporate" && (
           <div className="space-y-6">
             <h3 className="font-display text-xl text-amber-gold">Corporate Events Hero Image</h3>
