@@ -117,7 +117,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     heroImg: heroImage,
   },
   servicesPage: {
-    heroImg: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=75",
+    heroImg: heroImage,
   },
   contact: {
     heroImg: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1600&q=75",
