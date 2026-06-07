@@ -50,23 +50,26 @@ function AboutPage() {
   ];
 
   const content = useContent();
-  const heroImg = content.about.image || content.hero.image;
+  const heroImg = content.about.image || content.portfolio?.heroImg || content.hero.image;
 
   return (
     <main className="bg-cream text-espresso min-h-screen">
       {/* Hero/Intro Section */}
-      <section className="relative h-[60vh] min-h-[420px] w-full overflow-hidden bg-espresso text-cream py-32 px-6 md:px-12">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroImg})` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
-        </div>
-        <div className="relative z-10 mx-auto max-w-6xl">
+      <section className="relative h-[60vh] min-h-[420px] w-full overflow-hidden bg-espresso text-cream">
+        <motion.img
+          src={heroImg}
+          alt="About Mileyn Events"
+          className="absolute inset-0 h-full w-full object-cover"
+          initial={{ scale: 1.06, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.75 }}
+          transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-espresso via-espresso/50 to-espresso/40" />
+
+        <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col justify-end px-6 pb-16 md:px-12">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-amber-gold text-xs uppercase tracking-[0.3em] hover:text-cream transition-colors"
+            className="inline-flex items-center gap-2 text-amber-gold text-xs uppercase tracking-[0.3em] hover:text-cream transition-colors w-fit"
           >
             <ArrowLeft className="h-3 w-3" />
             Back
