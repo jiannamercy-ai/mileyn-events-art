@@ -10,6 +10,9 @@ import { TextInput } from "@/components/admin/TextInput";
 import { TextArea } from "@/components/admin/TextArea";
 import { ArrayManager } from "@/components/admin/ArrayManager";
 import { ImageUploader } from "@/components/admin/ImageUploader";
+import { TestimonialsManager } from "@/components/admin/TestimonialsManager";
+import { ClientsManager } from "@/components/admin/ClientsManager";
+import { TeamGalleryManager } from "@/components/admin/TeamGalleryManager";
 
 export const Route = createFileRoute("/admin/")({
   beforeLoad: async () => {
@@ -22,7 +25,7 @@ export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
 });
 
-type Tab = "hero" | "about" | "services" | "projects" | "portfolio" | "servicesPage" | "contact" | "corporate" | "weddings" | "privateEvents" | "team" | "teamFull" | "testimonials" | "social" | "footer";
+type Tab = "hero" | "about" | "services" | "projects" | "portfolio" | "servicesPage" | "contact" | "corporate" | "weddings" | "privateEvents" | "team" | "teamFull" | "testimonials" | "companies" | "teamGallery" | "social" | "footer";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "hero", label: "Hero" },
@@ -38,6 +41,8 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "team", label: "Team Collage" },
   { id: "teamFull", label: "Team Bios" },
   { id: "testimonials", label: "Testimonials" },
+  { id: "companies", label: "Clients / Companies" },
+  { id: "teamGallery", label: "Team Gallery" },
   { id: "social", label: "Contact / Social" },
   { id: "footer", label: "Footer" },
 ];
@@ -355,30 +360,44 @@ function AdminDashboard() {
         {tab === "testimonials" && (
           <div className="space-y-6">
             <h3 className="font-display text-xl text-amber-gold">Testimonials</h3>
-            <ArrayManager<(typeof content.testimonials)[number]>
+            <p className="text-sm text-cream/70">
+              Upload client testimonial images (e.g., screenshots of messages, reviews, or formatted quotes).
+            </p>
+            <TestimonialsManager
               items={content.testimonials}
               onChange={(testimonials) => update("testimonials", testimonials)}
-              createNew={() => ({ quote: "", name: "", role: "" })}
-              renderItem={(testimonial, _index, onChange) => (
-                <div className="space-y-3">
-                  <TextArea
-                    value={testimonial.quote}
-                    onChange={(quote) => onChange({ ...testimonial, quote })}
-                    label="Quote"
-                    rows={3}
-                  />
-                  <TextInput
-                    value={testimonial.name}
-                    onChange={(name) => onChange({ ...testimonial, name })}
-                    label="Name"
-                  />
-                  <TextInput
-                    value={testimonial.role}
-                    onChange={(role) => onChange({ ...testimonial, role })}
-                    label="Role / Event"
-                  />
-                </div>
-              )}
+            />
+          </div>
+        )}
+
+        {tab === "companies" && (
+          <div className="space-y-6">
+            <h3 className="font-display text-xl text-amber-gold">Clients We've Worked With</h3>
+            <p className="text-sm text-cream/70">
+              Manage company logos and names displayed in the clients section. Appears twice on the page: after testimonials and near the footer.
+            </p>
+            <ClientsManager
+              items={content.companies}
+              onChange={(companies) => update("companies", companies)}
+            />
+          </div>
+        )}
+
+        {tab === "teamGallery" && (
+          <div className="space-y-6">
+            <h3 className="font-display text-xl text-amber-gold">Team & Behind the Scenes Gallery</h3>
+            <p className="text-sm text-cream/70">
+              Upload photos for Team and Behind the Scenes galleries. Both galleries are combined and displayed with tab filtering (Team, Behind the Scenes, All).
+            </p>
+            <TeamGalleryManager
+              teamImages={content.teamGallery.team}
+              btsImages={content.teamGallery.behindTheScenes}
+              onUpdateTeam={(team) => update("teamGallery", { ...content.teamGallery, team })}
+              onUpdateBTS={(behindTheScenes) => update("teamGallery", { ...content.teamGallery, behindTheScenes })}
+            />
+          </div>
+        )}
+              onChange={(companies) => update("companies", companies)}
             />
           </div>
         )}

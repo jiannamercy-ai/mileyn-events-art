@@ -9,6 +9,7 @@ const LINKS = [
   { label: "Corporate", href: "/corporate" },
   { label: "Weddings", href: "/weddings" },
   { label: "Private Events", href: "/private-events" },
+  { label: "Team", href: "/team" },
   { label: "Contact", href: "/contact" },
 ];
 

@@ -4,7 +4,8 @@ import { TextArea } from "./TextArea";
 import { ImageUploader } from "./ImageUploader";
 import { ImageGallery } from "./ImageGallery";
 import { ArrayManager } from "./ArrayManager";
-import { Plus, Edit2, Trash2, X } from "lucide-react";
+import { YearEditionManager } from "./YearEditionManager";
+import { Plus, Edit2, Trash2, X, Check } from "lucide-react";
 import type { Project } from "@/data/site";
 
 interface ProjectsManagerProps {
@@ -255,14 +256,24 @@ export function ProjectsManager({ projects, onChange, disabled }: ProjectsManage
               disabled={disabled}
             />
           </div>
-        </div>
-      )}
 
-      {projects.length === 0 && (
-        <div className="text-center py-8 text-cream/50">
-          <p>No projects yet. Click "Add Project" to create one.</p>
-        </div>
-      )}
-    </div>
-  );
-}
+          {/* Recurring Annual Event */}
+          <div className="p-4 bg-charcoal/40 border border-amber-gold/30 rounded space-y-4">
+            <div className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                checked={editingProject.recurringAnnual || false}
+                onChange={(e) => updateProject(editingProject.slug, { recurringAnnual: e.target.checked })}
+                className="w-4 h-4 rounded border-amber-gold/50 cursor-pointer"
+                disabled={disabled}
+              />
+              <label className="text-sm font-medium text-amber-gold cursor-pointer">This is a recurring annual event</label>
+            </div>
+
+            {editingProject.recurringAnnual && (
+              <YearEditionManager
+                editions={editingProject.yearEditions || []}
+                onUpdate={(yearEditions) => updateProject(editingProject.slug, { yearEditions })}
+              />
+            )}
+          </div>

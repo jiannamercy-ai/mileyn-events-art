@@ -19,8 +19,10 @@ import bts4 from "@/assets/team-bts-4.jpg";
 
 export type HeroStat = { v: string; l: string };
 export type TeamFrame = { src: string; caption: string };
-export type Testimonial = { quote: string; name: string; role: string };
+export type Testimonial = { image: string; alt?: string };
 export type PageHero = { heroImg: string };
+export type Company = { logo: string; name: string };
+export type TeamGallery = { team: string[]; behindTheScenes: string[] };
 
 export type SiteContent = {
   hero: {
@@ -59,7 +61,9 @@ export type SiteContent = {
     frames: TeamFrame[];
   };
   teamFull: TeamMember[];
+  teamGallery: TeamGallery;
   testimonials: Testimonial[];
+  companies: Company[];
   social: typeof DEFAULT_SOCIAL;
   footer: { tagline: string; copyright: string };
 };
@@ -138,10 +142,28 @@ export const DEFAULT_CONTENT: SiteContent = {
   },
   teamFull: DEFAULT_TEAM,
   testimonials: [
-    { quote: "Mileyn didn't just decorate — they transformed the entire experience.", name: "Adaeze & Tomiwa", role: "The Pearl Wedding" },
-    { quote: "Professional, organized, and executed flawlessly.", name: "L. Achieng", role: "Executive Gala Host" },
-    { quote: "We exhaled the moment they took over. Truly rare.", name: "The Otieno Family", role: "Garden Soirée" },
+    { image: "https://images.unsplash.com/photo-1578402494114-212de25dfe6f?auto=format&fit=crop&w=600&q=75", alt: "Client testimonial 1" },
+    { image: "https://images.unsplash.com/photo-1577720643272-265f434c9d17?auto=format&fit=crop&w=600&q=75", alt: "Client testimonial 2" },
+    { image: "https://images.unsplash.com/photo-1544938707-74a4f5a0a81f?auto=format&fit=crop&w=600&q=75", alt: "Client testimonial 3" },
   ],
+  companies: [
+    { logo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=75", name: "Brand One" },
+    { logo: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=200&q=75", name: "Brand Two" },
+    { logo: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=200&q=75", name: "Brand Three" },
+    { logo: "https://images.unsplash.com/photo-1507238691445-1f32533e5555?auto=format&fit=crop&w=200&q=75", name: "Brand Four" },
+  ],
+  teamGallery: {
+    team: [
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=75",
+      "https://images.unsplash.com/photo-1507238691445-1f32533e5555?auto=format&fit=crop&w=400&q=75",
+    ],
+    behindTheScenes: [
+      bts1,
+      bts2,
+      bts3,
+      bts4,
+    ],
+  },
   social: DEFAULT_SOCIAL,
   footer: {
     tagline: "Complete event experiences — designed, produced, delivered.",

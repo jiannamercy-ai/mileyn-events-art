@@ -59,7 +59,14 @@ export function ConciergeIndicator() {
               </p>
               <a
                 href="#contact"
-                onClick={() => setOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpen(false);
+                  const contactSection = document.getElementById("contact");
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
                 className="thread-link mt-4 inline-block text-amber-gold text-sm tracking-widest uppercase"
               >
                 Begin →

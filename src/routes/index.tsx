@@ -9,6 +9,8 @@ import { Portfolio } from "@/components/site/Portfolio";
 import { WhyMileyn } from "@/components/site/WhyMileyn";
 import { CorporateWeddingSplit } from "@/components/site/CorporateWeddingSplit";
 import { Testimonials } from "@/components/site/Testimonials";
+import { ClientLogos } from "@/components/site/ClientLogos";
+import { TeamGallery } from "@/components/site/TeamGallery";
 import { FinalCTA } from "@/components/site/FinalCTA";
 import { Footer } from "@/components/site/Footer";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
@@ -59,7 +61,10 @@ function Index() {
       <WhyMileyn />
       <CorporateWeddingSplit />
       <Testimonials />
+      <ClientLogos />
+      <TeamGallery />
       <FinalCTA />
+      <ClientLogos />
       <Footer />
 
       <ConciergeIndicator />

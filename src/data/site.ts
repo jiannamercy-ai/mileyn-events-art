@@ -253,6 +253,14 @@ export type Project = {
   story: string;
   highlights: string[];
   testimonial?: { quote: string; author: string };
+  recurringAnnual?: boolean;
+  yearEditions?: {
+    year: number;
+    title: string;
+    date: string;
+    description: string;
+    gallery: string[];
+  }[];
 };
 
 export const PROJECTS: Project[] = [

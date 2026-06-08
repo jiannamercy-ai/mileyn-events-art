@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { useContent } from "@/lib/content";
 import { GoldenThread } from "@/components/site/GoldenThread";
 import { SocialLinks } from "@/components/site/SocialLinks";
+import { TeamGallery } from "@/components/site/TeamGallery";
 
 export const Route = createFileRoute("/team")({
   head: () => ({
@@ -69,6 +70,8 @@ function TeamPage() {
           ))}
         </div>
       </section>
+
+      <TeamGallery />
 
       <section className="bg-espresso text-cream py-20 px-6 md:px-12 text-center">
         <h2 className="font-display text-3xl md:text-5xl">Work with us</h2>
