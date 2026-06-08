@@ -397,10 +397,6 @@ function AdminDashboard() {
             />
           </div>
         )}
-              onChange={(companies) => update("companies", companies)}
-            />
-          </div>
-        )}
 
         {tab === "social" && (
           <div className="space-y-6">
