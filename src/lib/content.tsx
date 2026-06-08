@@ -234,13 +234,39 @@ export async function saveContent(next: SiteContent) {
 }
 
 export async function uploadImage(file: File): Promise<string> {
+  // Check authentication first
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session?.user) {
+    throw new Error("You must be logged in to upload images. Please refresh the page and log in again.");
+  }
+
   const ext = file.name.split(".").pop() || "jpg";
   const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-  const { error } = await supabase.storage.from("site-images").upload(path, file, {
-    cacheControl: "3600",
-    upsert: false,
-  });
-  if (error) throw error;
-  const { data } = supabase.storage.from("site-images").getPublicUrl(path);
-  return data.publicUrl;
+  
+  try {
+    const uploadResult = await supabase.storage.from("site-images").upload(path, file, {
+      cacheControl: "3600",
+      upsert: false,
+    });
+    
+    const uploadError = uploadResult?.error;
+    if (uploadError) {
+      const errorMessage = typeof uploadError === 'string' ? uploadError : (uploadError as any)?.message || "Upload failed";
+      console.error("Upload error details:", uploadError);
+      throw new Error(`Upload failed: ${errorMessage}`);
+    }
+    
+    const urlResult = supabase.storage.from("site-images").getPublicUrl(path);
+    const publicUrl = urlResult?.data?.publicUrl;
+    
+    if (!publicUrl) {
+      throw new Error("Failed to generate public URL for uploaded image");
+    }
+    
+    return publicUrl;
+  } catch (err: any) {
+    const errorMessage = typeof err === 'string' ? err : (err?.message || "Failed to upload image. Please try again.");
+    console.error("Image upload error:", err, "Message:", errorMessage);
+    throw new Error(errorMessage);
+  }
 }

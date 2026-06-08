@@ -34,7 +34,9 @@ export function ImageUploader({ value, onChange, label, disabled }: ImageUploade
       const url = await uploadImage(file);
       onChange(url);
     } catch (e: any) {
-      setError(e?.message || "Upload failed");
+      const errorMsg = typeof e === 'string' ? e : (e?.message || "Upload failed - please check console");
+      console.error("ImageUploader error:", e);
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }
@@ -62,7 +64,9 @@ export function ImageUploader({ value, onChange, label, disabled }: ImageUploade
       const url = await uploadImage(file);
       onChange(url);
     } catch (e: any) {
-      setError(e?.message || "Upload failed");
+      const errorMsg = typeof e === 'string' ? e : (e?.message || "Upload failed - please check console");
+      console.error("ImageUploader drop error:", e);
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }

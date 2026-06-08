@@ -40,7 +40,9 @@ export function ImageGallery({ images, onChange, label, disabled, maxImages }: I
       const url = await uploadImage(file);
       onChange([...images, url]);
     } catch (e: any) {
-      setError(e?.message || "Upload failed");
+      const errorMsg = typeof e === 'string' ? e : (e?.message || "Upload failed - please check console");
+      console.error("ImageGallery upload error:", e);
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }
@@ -75,7 +77,9 @@ export function ImageGallery({ images, onChange, label, disabled, maxImages }: I
         const url = await uploadImage(file);
         onChange([...images, url]);
       } catch (e: any) {
-        setError(e?.message || "Upload failed");
+        const errorMsg = typeof e === 'string' ? e : (e?.message || "Upload failed - please check console");
+        console.error("ImageGallery drop error:", e);
+        setError(errorMsg);
       } finally {
         setLoading(false);
       }
