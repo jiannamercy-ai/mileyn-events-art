@@ -77,7 +77,16 @@ export function ConciergeIndicator() {
       </AnimatePresence>
 
       <button
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => {
+          setOpen((v) => !v);
+          // Scroll to contact form
+          setTimeout(() => {
+            const contactSection = document.getElementById("contact");
+            if (contactSection) {
+              contactSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }, 100);
+        }}
         className="group flex items-center gap-3 rounded-full bg-espresso/85 backdrop-blur px-4 py-2.5 text-cream text-xs tracking-[0.18em] uppercase shadow-lg hover:bg-espresso transition-colors"
       >
         <span className="relative flex h-2 w-2">
