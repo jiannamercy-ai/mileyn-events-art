@@ -277,3 +277,8 @@ export function ProjectsManager({ projects, onChange, disabled }: ProjectsManage
               />
             )}
           </div>
+        </div>
+      )}
+    </div>
+  );
+}
